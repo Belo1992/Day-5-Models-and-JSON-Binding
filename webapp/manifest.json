@@ -47,11 +47,15 @@
     },
     "models": {
       "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "sapips.training.jsonbinding.i18n.i18n"
-        }
-      }
+              "type": "sap.ui.model.resource.ResourceModel",
+              "settings": {
+                  "bundleName": "sapips.training.jsonbinding.i18n.i18n"
+              }
+          },
+       "ProductsModel": {
+              "type": "sap.ui.model.json.JSONModel",
+              "uri": "model/ProductsModel.json"
+          }
     },
     "resources": {
       "css": [
