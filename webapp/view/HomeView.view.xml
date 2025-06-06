@@ -1,6 +1,134 @@
-<mvc:View controllerName="sapips.training.jsonbinding.controller.HomeView"
+<mvc:View
+    controllerName="sapips.training.jsonbinding.controller.HomeView"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <Page id="page" title="{i18n>title}" >
+        <content>
+            <!-- Panel 1: Data Binding Basics -->
+            <Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel1" class="sapUiResponsiveMargin" headerText="Data Binding Basics">
+                <headerToolbar>
+                    <Toolbar id="toolbar1">
+                        <Title text="{i18n>title}" id="idTitle"/>
+                        <ToolbarSpacer id="toolbarSpacer1"/>
+                    </Toolbar>
+                </headerToolbar>
+                <content>
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0">
+                        <form:content>
+                            <Label text="{i18n>EidLbl}" id="eidLbl"/>
+                            <Input width="100%" id="eidInput" valueLiveUpdate="true" enabled="{/Enabled}" value="{/Eid}"/>
+                            <Label text="{i18n>EnabledLbl}" id="enabledLbl"/>
+                            <CheckBox selected="{/Enabled}" id="enabledCBox"/>
+                        </form:content>
+                    </form:SimpleForm>
+                </content>
+            </Panel>
+            <!-- Panel 2: Address Details -->
+            <Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel2" class="sapUiResponsiveMargin" headerText="Address Details">
+                <headerToolbar>
+                    <Toolbar id="toolbar2">
+                        <Title text="{i18n>addressDetails}" id="idTitle2"/>
+                        <ToolbarSpacer id="toolbarSpacer2"/>
+                    </Toolbar>
+                </headerToolbar>
+                <content>
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="sFormEmployeeDetails">
+                        <form:content>
+                            <Label text="{i18n>address}" id="idLblAddress"/>
+                            <Text width="100%" id="idAddressTxt" class="sapUiSmallMarginBottom" text="{/Address/Street} {/Address/Zip} {/Address/City} {/Address/Country}"/>
+                            <Link id="emailLnk" href="{path: '/Eid', formatter:'.formatter.formatMail'}" text="{i18n>sendEmail}"/>
+                            <Label text="{i18n>salesAmount}" id="salesAmntLbl" class="sapUiSmallMarginBegin"/>
+                            <Input 
+                                width="100%" 
+                                id="idSalesAmntInput" 
+                                class="sapUiSmallMarginBottom" 
+                                description="{/CurrencyCode}" 
+                                enabled="true" 
+                                value="{ parts: [ {path: '/SalesAmount'}, {path: '/CurrencyCode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"/>
+                        </form:content>
+                    </form:SimpleForm>
+                </content>
+            </Panel>
+            <!-- Panel 3: Aggregation Binding -->
+            <Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel3" class="sapUiResponsiveMargin" headerText="{i18n>aggreTitle}">
+                <headerToolbar>
+                    <Toolbar id="idTbAggr">
+                        <Title text="{i18n>aggreTitle}" id="idTitle3"/>
+                        <ToolbarSpacer id="toolbarSpacer3"/>
+                    </Toolbar>
+                </headerToolbar>
+                <content>
+                    <List id="idList01" items="{oProductDetailListModel>/Products}" mode="SingleSelectMaster" itemPress="onSelectProduct">
+                        <items>
+                            <ObjectListItem 
+                                type="Active"
+                                title="{oProductDetailListModel>ProductName}"
+                                number="{
+                                    parts: [{path: 'oProductDetailListModel>UnitPrice'}, {path: '/CurrencyCode'} ],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: { showMeasure: false} }"
+                                numberUnit="{/CurrencyCode}"
+                                id="listItem1">
+                                <attributes>
+                                    <ObjectAttribute title="{i18n>stockOnHand}" text="{oProductDetailListModel>QuantityPerUnit}" id="idAttribute0"/>
+                                </attributes>
+                                <attributes>
+                                    <ObjectAttribute id="idAttribute2" title="{i18n>objAtriTitle}" text="{ parts: [ {path:'oProductDetailListModel>UnitPrice'}, {path:'oProductDetailListModel>UnitsInStock'}, {path:'/CurrencyCode'} ], formatter:'.formatter.formatStockValue'}"/>
+                                </attributes>                       
+                            </ObjectListItem>
+                        </items>
+                    </List>
+                </content>
+            </Panel>
+            <!-- Panel 4: Product Details -->
+            <Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel4" headerText="{i18n>productDetails}" class="sapUiResponsiveMargin">
+                <headerToolbar>
+                    <Toolbar id="idToolbar4">
+                        <Title text="{i18n>productDetails}" id="idTitle4"/>
+                        <ToolbarSpacer id="idToolbarSpacer4"/>
+                    </Toolbar>
+                </headerToolbar>
+                <content> 
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="sFormProductDetails"> 
+                        <form:content> 
+                            <Label text="{i18n>productID}" id="idLblProdId"/> 
+                            <Input width="100%" id="idInptproductId" value="{oProductDetailListModel>ProductId}"/>  
+                            
+                            <Label text="{i18n>productName}" id="prodNameLbl"/> 
+                            <Input width="100%" id="idInptprodName" value="{oProductDetailListModel>ProductName}"/>
+                            
+                            <Label text="{i18n>supplierID}" id="idLblsupId"/> 
+                            <Input width="100%" id="idInptsupId" value="{oProductDetailListModel>SupplierID}"/> 
+                            
+                            <Label text="{i18n>categoryID}" id="idLblcatId"/> 
+                            <Input width="100%" id="idInptcatId" value="{oProductDetailListModel>CategoryID}"/> 
+                            
+                            <Label text="{i18n>quantityPerUnit}" id="idLblQuantPerUnit"/> 
+                            <Input width="100%" id="idInptQuantPerUnit" value="{oProductDetailListModel>QuantityPerUnit}"/>  
+                            
+                            <Label text="{i18n>unitPrice}" id="idLblUnitPrc"/> 
+                            <Input width="100%" id="idInptUnitPrc" value="{oProductDetailListModel>UnitPrice}"/>
+                            
+                            <Label text="{i18n>unitInStock}" id="idLblUnitInStock"/> 
+                            <Input width="100%" id="idInptUnitInStock" value="{oProductDetailListModel>UnitsInStock}"/>
+                            
+                            <Label text="{i18n>unitsOnOrder}" id="idLblUnitOnOrder"/> 
+                            <Input width="100%" id="idInptUnitOnOrde" value="{oProductDetailListModel>UnitOnOrder}"/>  
+                            
+                            <Label text="{i18n>reorderLevel}" id="idLblReorderLevel"/> 
+                            <Input width="100%" id="idInptReorderLevel" value="{oProductDetailListModel>ReorderLevel}"/> 
+                            
+                            <Label text="{i18n>discontinued}" id="idLbldiscont"/> 
+                            <Input width="100%" id="idInptdiscont" value="{oProductDetailListModel>Discontinued}"/>
+                        </form:content> 
+                    </form:SimpleForm> 
+                </content>
+            </Panel>
+        </content>
+
+
     </Page>
 </mvc:View>

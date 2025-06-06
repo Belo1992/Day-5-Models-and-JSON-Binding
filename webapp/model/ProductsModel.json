@@ -1,0 +1,42 @@
+{
+    "Products": [
+      {
+        "ProductId": "PRD-0001",
+        "ProductName": "iPhone SE 64GB midnight",
+        "CategoryID": "IPSE",
+        "SupplierID": "SUPPL_01",
+        "QuantityPerUnit": 10,
+        "UnitPrice": 29990,
+        "UnitsInStock": 64,
+        "UnitOnOrder": 0,
+        "ReorderLevel": 0,
+        "Discontinued": false        
+      },
+      {
+        "ProductId": "PRD-0002",
+        "ProductName": "iPhone 14 128GB Midnight",
+        "CategoryID": "IP14",
+        "SupplierID": "SUPPL_02",
+        "QuantityPerUnit": 20,
+        "UnitPrice": 39990,
+        "UnitsInStock": 128,
+        "UnitOnOrder": 0,
+        "ReorderLevel": 0,
+        "Discontinued": false
+      },
+      {
+        "ProductId": "PRD-0003",
+        "ProductName": "iPhone 14 Plus 128GB Midnight",
+        "CategoryID": "IP14PLUS",
+        "SupplierID": "SUPPL_03",
+        "QuantityPerUnit": 15,
+        "UnitPrice": 44990,
+        "UnitsInStock": 128,
+        "UnitOnOrder": 0,
+        "ReorderLevel": 0,
+        "Discontinued": false
+      }
+    ]
+  }
+  
+  
